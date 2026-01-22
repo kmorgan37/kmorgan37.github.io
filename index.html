@@ -1,1 +1,784 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kelly Morgan — Persona Documentation</title>
+  <meta name="description" content="Persona documentation of my life and the world around me—what I see and experience, how I view those, and other thoughts I tend to have." />
+
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --panel: #111827;
+      --panel2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --border:#243041;
+      --accent:#60a5fa;
+      --accent2:#34d399;
+      --danger:#fb7185;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    [data-theme="light"]{
+      --bg:#f6f7fb;
+      --panel:#ffffff;
+      --panel2:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e2e8f0;
+      --accent:#2563eb;
+      --accent2:#059669;
+      --danger:#e11d48;
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1000px 500px at 10% -10%, rgba(96,165,250,.15), transparent),
+                  radial-gradient(800px 600px at 110% 10%, rgba(52,211,153,.10), transparent),
+                  var(--bg);
+      color: var(--text);
+      line-height:1.45;
+    }
+
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px 18px 60px;
+    }
+
+    header{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom: 18px;
+    }
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      min-width: 260px;
+    }
+    .badge{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(96,165,250,.95), rgba(52,211,153,.85));
+      box-shadow: var(--shadow);
+    }
+    h1{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size: 13px;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:1px solid var(--border);
+      background: color-mix(in srgb, var(--panel), transparent 0%);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      transition: transform .06s ease, border-color .2s ease, background .2s ease;
+      user-select:none;
+    }
+    .btn:hover{border-color: color-mix(in srgb, var(--accent) 55%, var(--border));}
+    .btn:active{transform: translateY(1px);}
+    .btn.primary{
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 85%, #000), color-mix(in srgb, var(--accent2) 65%, #000));
+      border-color: transparent;
+      color:white;
+    }
+    .btn.danger{
+      border-color: color-mix(in srgb, var(--danger) 55%, var(--border));
+      color: color-mix(in srgb, var(--danger) 85%, var(--text));
+      background: color-mix(in srgb, var(--danger) 10%, var(--panel));
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr;}
+    }
+
+    .card{
+      background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 92%, transparent), var(--panel2));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .card .hd h2{
+      margin:0;
+      font-size: 14px;
+      letter-spacing:.4px;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--text) 70%, var(--muted));
+    }
+    .card .bd{
+      padding: 16px;
+    }
+
+    .pill{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
+      background: color-mix(in srgb, var(--panel) 70%, transparent);
+    }
+
+    .intro p{margin:0 0 10px}
+    .intro .quote{
+      padding: 12px 14px;
+      border-left: 3px solid var(--accent);
+      background: color-mix(in srgb, var(--accent) 9%, var(--panel));
+      border-radius: 12px;
+      color: color-mix(in srgb, var(--text) 92%, var(--muted));
+    }
+
+    label{
+      display:block;
+      font-size: 12px;
+      color: var(--muted);
+      margin: 10px 0 6px;
+    }
+    input, textarea, select{
+      width:100%;
+      border:1px solid var(--border);
+      background: color-mix(in srgb, var(--panel) 86%, transparent);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      outline:none;
+      transition: border-color .2s ease;
+      font: inherit;
+    }
+    textarea{min-height: 110px; resize: vertical;}
+    input:focus, textarea:focus, select:focus{
+      border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 640px){
+      .row{grid-template-columns:1fr;}
+    }
+
+    .help{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 12px;
+    }
+    .toolbar .left, .toolbar .right{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .entries{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .entry{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 12px 10px;
+      background: color-mix(in srgb, var(--panel) 84%, transparent);
+    }
+    .entry .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom: 8px;
+    }
+    .entry .title{
+      font-weight: 650;
+      letter-spacing:.2px;
+      margin:0;
+    }
+    .entry .date{
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .chips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top: 8px;
+    }
+    .chip{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      color: color-mix(in srgb, var(--text) 85%, var(--muted));
+      background: color-mix(in srgb, var(--panel) 75%, transparent);
+      cursor:pointer;
+    }
+    .chip:hover{border-color: color-mix(in srgb, var(--accent) 45%, var(--border));}
+
+    .entry .section{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed color-mix(in srgb, var(--border) 70%, transparent);
+    }
+    .k{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing:.5px;
+      color: var(--muted);
+      margin:0 0 6px;
+    }
+    .v{
+      margin:0;
+      color: color-mix(in srgb, var(--text) 94%, var(--muted));
+      white-space: pre-wrap;
+    }
+
+    .entry .actions{
+      display:flex;
+      gap:10px;
+      margin-top: 10px;
+      flex-wrap:wrap;
+    }
+
+    .empty{
+      color: var(--muted);
+      border:1px dashed var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      text-align:center;
+    }
+
+    footer{
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align:center;
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <h1 id="siteTitle">Kelly Morgan — Persona Documentation</h1>
+          <p class="subtitle" id="siteSubtitle">Junior Babson student • Chicago, IL</p>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="themeBtn" title="Toggle theme">🌓 <span>Theme</span></button>
+        <button class="btn" id="exportBtn" title="Export your entries as a JSON file">⬇️ <span>Export</span></button>
+        <label class="btn" title="Import entries from a JSON file" style="cursor:pointer;">
+          ⬆️ <span>Import</span>
+          <input id="importInput" type="file" accept="application/json" style="display:none;">
+        </label>
+        <button class="btn danger" id="wipeBtn" title="Delete all entries (cannot be undone)">🗑️ <span>Wipe</span></button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left: About + Entry form -->
+      <section class="card">
+        <div class="hd">
+          <h2>About this site</h2>
+          <span class="pill">persona log • reflections • memory</span>
+        </div>
+        <div class="bd intro">
+          <div class="quote">
+            I am Kelly Morgan, a Junior Babson student from Chicago, IL. This website is for my persona documentation of my life and the world around me. I want it to include what I see and experience, how I view those, and other thoughts I tend to have.
+          </div>
+
+          <p class="help">
+            Add entries below. They save automatically to <span class="mono">localStorage</span> (your browser), so this is private to your device unless you export/share the file.
+          </p>
+
+          <hr style="border:none;border-top:1px solid var(--border); margin: 14px 0;">
+
+          <h2 style="margin:0 0 6px; font-size:14px; text-transform:uppercase; letter-spacing:.4px; color: color-mix(in srgb, var(--text) 70%, var(--muted));">
+            Add a new entry
+          </h2>
+
+          <form id="entryForm">
+            <label for="title">Title</label>
+            <input id="title" name="title" placeholder="e.g., Snowy walk across campus" maxlength="120" required />
+
+            <div class="row">
+              <div>
+                <label for="date">Date</label>
+                <input id="date" name="date" type="date" required />
+              </div>
+              <div>
+                <label for="mood">Mood / tone</label>
+                <select id="mood" name="mood">
+                  <option value="">(optional)</option>
+                  <option>curious</option>
+                  <option>grateful</option>
+                  <option>overwhelmed</option>
+                  <option>motivated</option>
+                  <option>reflective</option>
+                  <option>excited</option>
+                  <option>frustrated</option>
+                  <option>peaceful</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="seen">What I saw / experienced</label>
+            <textarea id="seen" name="seen" placeholder="Describe what happened, what you noticed, what stood out..."></textarea>
+
+            <label for="view">How I view it</label>
+            <textarea id="view" name="view" placeholder="Your interpretation, meaning, perspective, why it matters..."></textarea>
+
+            <label for="thoughts">Other thoughts I tend to have</label>
+            <textarea id="thoughts" name="thoughts" placeholder="Connections, patterns, questions, reminders to future-you..."></textarea>
+
+            <label for="tags">Tags (comma-separated)</label>
+            <input id="tags" name="tags" placeholder="e.g., babson, chicago, soccer, friends, academics" />
+
+            <div style="display:flex; gap:10px; margin-top: 12px; flex-wrap:wrap;">
+              <button class="btn primary" type="submit">➕ Save entry</button>
+              <button class="btn" type="button" id="prefillBtn" title="Add an example entry">✨ Example</button>
+            </div>
+
+            <div class="help">
+              Tip: Click any tag chip on the right to filter entries.
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Right: Entries -->
+      <aside class="card">
+        <div class="hd">
+          <h2>Journal entries</h2>
+          <span class="pill"><span id="count">0</span> total</span>
+        </div>
+        <div class="bd">
+          <div class="toolbar">
+            <div class="left">
+              <input id="search" placeholder="Search titles + text..." />
+              <select id="sort">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="title">Title (A–Z)</option>
+              </select>
+            </div>
+            <div class="right">
+              <span class="pill" id="filterPill">No filter</span>
+              <button class="btn" id="clearFilterBtn" title="Clear tag filter">🧼 Clear</button>
+            </div>
+          </div>
+
+          <div id="entries" class="entries"></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      Built as a single-file site you can upload to GitHub Pages. • Your data lives in your browser unless you export it.
+    </footer>
+  </div>
+
+  <script>
+    // ---------- Storage ----------
+    const STORAGE_KEY = "persona_entries_v1";
+    const THEME_KEY = "persona_theme_v1";
+
+    function loadEntries(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch(e){
+        console.warn("Failed to load entries:", e);
+        return [];
+      }
+    }
+
+    function saveEntries(entries){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    }
+
+    // ---------- State ----------
+    let entries = loadEntries();
+    let activeTag = "";
+    let searchTerm = "";
+    let sortMode = "newest";
+
+    // ---------- Elements ----------
+    const entriesEl = document.getElementById("entries");
+    const countEl = document.getElementById("count");
+    const filterPillEl = document.getElementById("filterPill");
+
+    const form = document.getElementById("entryForm");
+    const titleEl = document.getElementById("title");
+    const dateEl = document.getElementById("date");
+    const moodEl = document.getElementById("mood");
+    const seenEl = document.getElementById("seen");
+    const viewEl = document.getElementById("view");
+    const thoughtsEl = document.getElementById("thoughts");
+    const tagsEl = document.getElementById("tags");
+
+    const searchEl = document.getElementById("search");
+    const sortEl = document.getElementById("sort");
+    const clearFilterBtn = document.getElementById("clearFilterBtn");
+
+    const exportBtn = document.getElementById("exportBtn");
+    const importInput = document.getElementById("importInput");
+    const wipeBtn = document.getElementById("wipeBtn");
+    const themeBtn = document.getElementById("themeBtn");
+    const prefillBtn = document.getElementById("prefillBtn");
+
+    // ---------- Helpers ----------
+    function uid(){
+      return Math.random().toString(16).slice(2) + "-" + Date.now().toString(16);
+    }
+
+    function normalizeTags(str){
+      return (str || "")
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean)
+        .map(s => s.toLowerCase())
+        .slice(0, 20);
+    }
+
+    function formatDate(yyyy_mm_dd){
+      // safe display without timezone weirdness
+      const [y,m,d] = (yyyy_mm_dd || "").split("-").map(Number);
+      if(!y || !m || !d) return "Unknown date";
+      const dt = new Date(Date.UTC(y, m-1, d));
+      return dt.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"numeric" });
+    }
+
+    function entryMatches(e, term){
+      if(!term) return true;
+      const t = term.toLowerCase();
+      const hay = [
+        e.title, e.mood, e.seen, e.view, e.thoughts, (e.tags || []).join(" ")
+      ].join(" ").toLowerCase();
+      return hay.includes(t);
+    }
+
+    function sortEntries(list){
+      const copy = [...list];
+      if(sortMode === "title"){
+        copy.sort((a,b) => (a.title || "").localeCompare(b.title || ""));
+      }else if(sortMode === "oldest"){
+        copy.sort((a,b) => (a.date || "").localeCompare(b.date || ""));
+      }else{
+        copy.sort((a,b) => (b.date || "").localeCompare(a.date || ""));
+      }
+      return copy;
+    }
+
+    function escapeHtml(s){
+      return (s || "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // ---------- Render ----------
+    function render(){
+      countEl.textContent = entries.length.toString();
+
+      filterPillEl.textContent = activeTag ? `Tag: #${activeTag}` : "No filter";
+
+      let visible = entries.filter(e => !activeTag || (e.tags || []).includes(activeTag));
+      visible = visible.filter(e => entryMatches(e, searchTerm));
+      visible = sortEntries(visible);
+
+      if(visible.length === 0){
+        entriesEl.innerHTML = `
+          <div class="empty">
+            <div style="font-size:14px; margin-bottom:6px;">No entries yet (or none match your filters).</div>
+            <div>Try adding one on the left ✍️</div>
+          </div>`;
+        return;
+      }
+
+      entriesEl.innerHTML = visible.map(e => {
+        const tags = (e.tags || []).map(t => `<span class="chip" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`).join("");
+        return `
+          <article class="entry" data-id="${escapeHtml(e.id)}">
+            <div class="meta">
+              <h3 class="title">${escapeHtml(e.title || "Untitled")}</h3>
+              <div class="date">
+                <span>📅 ${escapeHtml(formatDate(e.date))}</span>
+                ${e.mood ? `<span class="pill">🙂 ${escapeHtml(e.mood)}</span>` : ""}
+              </div>
+            </div>
+
+            ${e.seen ? `
+              <div class="section">
+                <p class="k">What I saw / experienced</p>
+                <p class="v">${escapeHtml(e.seen)}</p>
+              </div>` : ""}
+
+            ${e.view ? `
+              <div class="section">
+                <p class="k">How I view it</p>
+                <p class="v">${escapeHtml(e.view)}</p>
+              </div>` : ""}
+
+            ${e.thoughts ? `
+              <div class="section">
+                <p class="k">Other thoughts I tend to have</p>
+                <p class="v">${escapeHtml(e.thoughts)}</p>
+              </div>` : ""}
+
+            ${(e.tags && e.tags.length) ? `<div class="chips">${tags}</div>` : ""}
+
+            <div class="actions">
+              <button class="btn" data-action="edit" data-id="${escapeHtml(e.id)}">✏️ Edit</button>
+              <button class="btn danger" data-action="delete" data-id="${escapeHtml(e.id)}">🗑️ Delete</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      // Tag chip clicking
+      document.querySelectorAll(".chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+          activeTag = chip.getAttribute("data-tag") || "";
+          render();
+        });
+      });
+
+      // Entry action buttons
+      document.querySelectorAll("[data-action='delete']").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          if(!id) return;
+          const ok = confirm("Delete this entry? This cannot be undone.");
+          if(!ok) return;
+          entries = entries.filter(e => e.id !== id);
+          saveEntries(entries);
+          render();
+        });
+      });
+
+      document.querySelectorAll("[data-action='edit']").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          const e = entries.find(x => x.id === id);
+          if(!e) return;
+
+          // Fill form with entry data for editing
+          titleEl.value = e.title || "";
+          dateEl.value = e.date || "";
+          moodEl.value = e.mood || "";
+          seenEl.value = e.seen || "";
+          viewEl.value = e.view || "";
+          thoughtsEl.value = e.thoughts || "";
+          tagsEl.value = (e.tags || []).join(", ");
+
+          form.dataset.editing = id;
+          form.querySelector("button[type='submit']").textContent = "💾 Update entry";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+    }
+
+    // ---------- Form ----------
+    function resetForm(){
+      form.reset();
+      form.dataset.editing = "";
+      form.querySelector("button[type='submit']").textContent = "➕ Save entry";
+      // keep date auto-filled
+      dateEl.value = new Date().toISOString().slice(0,10);
+    }
+
+    form.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+
+      const payload = {
+        id: form.dataset.editing || uid(),
+        title: titleEl.value.trim(),
+        date: dateEl.value,
+        mood: moodEl.value || "",
+        seen: seenEl.value.trim(),
+        view: viewEl.value.trim(),
+        thoughts: thoughtsEl.value.trim(),
+        tags: normalizeTags(tagsEl.value)
+      };
+
+      // Basic validation
+      if(!payload.title){
+        alert("Please add a title.");
+        titleEl.focus();
+        return;
+      }
+      if(!payload.date){
+        alert("Please pick a date.");
+        dateEl.focus();
+        return;
+      }
+
+      if(form.dataset.editing){
+        entries = entries.map(e => e.id === payload.id ? payload : e);
+      }else{
+        entries.push(payload);
+      }
+
+      saveEntries(entries);
+      resetForm();
+      render();
+    });
+
+    // ---------- Search / Sort / Filter ----------
+    searchEl.addEventListener("input", () => {
+      searchTerm = searchEl.value.trim();
+      render();
+    });
+
+    sortEl.addEventListener("change", () => {
+      sortMode = sortEl.value;
+      render();
+    });
+
+    clearFilterBtn.addEventListener("click", () => {
+      activeTag = "";
+      render();
+    });
+
+    // ---------- Export / Import ----------
+    exportBtn.addEventListener("click", () => {
+      const data = {
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        entries
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "persona-entries.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    importInput.addEventListener("change", async () => {
+      const file = importInput.files && importInput.files[0];
+      if(!file) return;
+
+      try{
+        const text = await file.text();
+        const data = JSON.parse(text);
+        const imported = Array.isArray(data.entries) ? data.entries : (Array.isArray(data) ? data : []);
+        if(!Array.isArray(imported)) throw new Error("Invalid format.");
+
+        // Merge by id (import wins)
+        const byId = new Map(entries.map(e => [e.id, e]));
+        for(const e of imported){
+          if(e && e.id) byId.set(e.id, e);
+        }
+        entries = Array.from(byId.values());
+        saveEntries(entries);
+        render();
+        alert("Import complete!");
+      }catch(err){
+        alert("Could not import that file. Make sure it's a valid JSON export from this site.");
+      }finally{
+        importInput.value = "";
+      }
+    });
+
+    wipeBtn.addEventListener("click", () => {
+      const ok = confirm("Wipe ALL entries? This cannot be undone.");
+      if(!ok) return;
+      entries = [];
+      saveEntries(entries);
+      activeTag = "";
+      searchTerm = "";
+      searchEl.value = "";
+      render();
+    });
+
+    // ---------- Theme ----------
+    function setTheme(theme){
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem(THEME_KEY, theme);
+    }
+    function toggleTheme(){
+      const current = localStorage.getItem(THEME_KEY) || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
+    }
+    themeBtn.addEventListener("click", toggleTheme);
+
+    // ---------- Prefill example ----------
+    prefillBtn.addEventListener("click", () => {
+      titleEl.value = "An example entry: noticing patterns";
+      dateEl.value = new Date().toISOString().slice(0,10);
+      moodEl.value = "reflective";
+      seenEl.value = "I caught myself paying attention to small details I usually ignore—tone of voice, pauses, who speaks last.";
+      viewEl.value = "It feels like I’m learning how environments shape people. The same moment reads differently depending on context.";
+      thoughtsEl.value
